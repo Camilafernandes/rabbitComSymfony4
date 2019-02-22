@@ -1,0 +1,52 @@
+# Integrando Rabbit com Symfony 4
+
+Necessário instalar a lib do php bcmath
+
+```bash
+sudo apt-get install php-bcmath
+```
+
+# Para rodar uma imagem Rabbit para teste, utilize docker
+
+```bash
+docker run -d --hostname my-rabbit --name rabbit13 -p 8080:15672 -p 5672:5672 -p 25676:25676 rabbitmq:3-management
+```
+
+## Dentro da pasta do projeto
+
+```bash
+composer install
+```
+
+## Criar o channel no Rabbit
+
+```bash
+php bin/console rabbitmq:setup-fabric
+```
+
+# Rode o seguinte comando para habilitar o consumer
+
+```bash
+php bin/console rabbitmq:consumer emailing
+```
+
+# Para habilitar o consumer e ver a mensagem recebida
+
+Acesse em seu navegador: http://localhost:8000/create
+
+
+No terminal deve aparecer a seguinte mensagem
+
+```bash
+
+array(3) {
+  ["Type"]=>
+  string(12) "Verification"
+  ["Message"]=>
+  string(12) "Sou uma fila"
+  ["Name"]=>
+  NULL
+}
+
+```
+
